@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: koa-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          serviceName: koa-service 
+          servicePort: 8080 
+
+#apiVersion: networking.k8s.io/v1beta1
+#kind: Ingress
+#metadata:
+  #name: http-ingress
+#spec:
+  #rules:
+    #- host: www.test.next
+      #http:
+        #paths:
+          #- backend:
+            #serviceName: koa-service
+            #servicePort: 4444
+
+#apiVersion: networking.k8s.io/v1beta1
+#kind: Ingress
+#metadata:
+  #name: http-ingress
+#spec:
+  #rules:
+  #- http:
+      #paths:
+      #- path: /
+        backend:
+          serviceName: koa-nodeport
+          servicePort: 4444
+
+#apiVersion: apps/v1
+#kind: DaemonSet
+#metadata:
+  #name: nginx-ingress-microk8s-controller
+  #namespace: ingress
+
+#spec:
+  #template:
+    #spec:
+      #containers:
+      #- name: nginx-ingress-microk8s
+        #ports:
+        #- containerPort: 80
+        #- containerPort: 443
+        #- name: proxied-tcp-6379
+          #containerPort: 6379
+          #hostPort: 6379
+          #protocol: TCP
